@@ -1,18 +1,23 @@
 # esp-rs-devcontainer
 This repository uses Docker to offer the enviroment needed to develop applications for [ESP 
-boards using Rust](https://github.com/esp-rs), it also offers integration with VsCode using [Remote - Containers](https://code.visualstudio.com/docs/remote/containers)
+boards using Rust](https://github.com/esp-rs), it also offers integration with Visual Studio Code using [remote containers](https://code.visualstudio.com/docs/remote/containers).
 
 ## Table of Contents
 
 - [Quick Start](#quick-start)
-  - [Create a project](#create-a-project)
+  - [Requirements](#requirements)
   - [Build](#build)
   - [Flash](#flash)
     - [Adafruit ESPTool](#adafruit-esptool)
+  - [Monitor](#monitor)
 
 # Quick Start
 This repository is intended to be used with Visual Studio Code, using the
 `Remote - Container` extension.
+## Requirements
+- [Visual Studio Code](https://code.visualstudio.com/download)
+  - [Remote - Container Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- [Docker](https://docs.docker.com/get-docker/)
 
 After opening the repository folder with Visual Studio Code, a popup will come
 up asking to open reopen the folder in a Container. Click `Yes` and after the
