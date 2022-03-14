@@ -14,7 +14,6 @@
 		"[rust]": {
 			"editor.defaultFormatter": "matklad.rust-analyzer"
 		},
-
 	},
 	"extensions": [
 		"matklad.rust-analyzer",

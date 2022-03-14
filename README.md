@@ -1,4 +1,4 @@
-# esp-rs-env-vs
+# esp-rs-devcontainer
 This repository uses Docker to offer the enviroment needed to develop applications for [ESP 
 boards using Rust](https://github.com/esp-rs), it also offers integration with VsCode using [Remote - Containers](https://code.visualstudio.com/docs/remote/containers)
 
