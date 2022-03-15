@@ -23,7 +23,7 @@
 		"mutantdino.resourcemonitor",
 		"yzhang.markdown-all-in-one"
 	],
-	"postCreateCommand": "cargo generate --git https://github.com/esp-rs/esp-idf-template cargo",
+	"postStartCommand": "cargo generate --git https://github.com/esp-rs/esp-idf-template cargo",
 	"remoteUser": "vscode",
 	"containerUser": "vscode",
 	"workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/esp-rs,type=bind,consistency=cached",
