@@ -30,14 +30,16 @@ you can generate a project from a template at any time using:
 `cargo generate --git https://github.com/esp-rs/esp-idf-template cargo`
 
 ## Build
-In order to build the generated application we use [cargo-espflash](https://github.com/esp-rs/espflash) tool which allows us to save the generated image:
+In order to build the generated application we need to enter the project folder and use the [cargo-espflash](https://github.com/esp-rs/espflash) tool which 
+allows us to save the generated image in the disk instead of flashing to device:
 
-`cargo espflash save-image --release <imageName>`
-`cargo +esp espflash save-image --release <imageName>`
+`cargo espflash save-image --release <imageName>.bin`
+
+`cargo +esp espflash save-image --release <imageName>.bin`
 
 
 ## Flash
-Since the repository folder is syncronized with the Docker /home/vscode/esp-rs folder,
+Since the repository folder is syncronized with the Docker /home/vscode/dev folder,
 you can accress the generated image of your application from the local repository folder.
 That being said, there are several ways to flash it.
 ### [Adafruit ESPTool](https://adafruit.github.io/Adafruit_WebSerial_ESPTool/)
