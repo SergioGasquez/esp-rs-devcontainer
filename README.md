@@ -33,6 +33,8 @@ you can generate a project from a template at any time using:
 In order to build the generated application we use [cargo-espflash](https://github.com/esp-rs/espflash) tool which allows us to save the generated image:
 
 `cargo espflash save-image --release <imageName>`
+`cargo +esp espflash save-image --release <imageName>`
+
 
 ## Flash
 Since the repository folder is syncronized with the Docker /home/vscode/esp-rs folder,
