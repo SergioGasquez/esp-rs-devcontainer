@@ -10,6 +10,7 @@ boards using Rust](https://github.com/esp-rs), it also offers integration with V
   - [Flash](#flash)
     - [Adafruit ESPTool](#adafruit-esptool)
   - [Monitor](#monitor)
+- [Known Issues](#known-issues)
 
 # Quick Start
 This repository is intended to be used with Visual Studio Code, using the
@@ -62,3 +63,15 @@ You can use [espmonitor](https://github.com/esp-rs/espmonitor) from your local e
 the output of your ESP board:
 
 `espmonitor /dev/<serialPort>`
+
+# Known Issues 
+## LIBCLAN_PATH is not properly setted
+This error ocurred when using the enviroment in Apple Sillicon
+### Error
+```
+  thread 'main' panicked at 'Unable to find libclang: "couldn't find any valid shared libraries matching: ['libclang.so', 'libclang-*.so', 'libclang.so.*', 'libclang-*.so.*'], set the `LIBCLANG_PATH` environment variable to a path where one of these files can be found (invalid: [])"', /home/vscode/.cargo/registry/src/github.com-1ecc6299db9ec823/bindgen-0.59.2/src/lib.rs:2144:31
+  note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+```
+### Fix
+`export LIBCLANG_PATH=/home/vscode/.espressif/tools/xtensa-esp32-elf-clang/esp-13.0.0-20211203-aarch64-unknown-linux-gnu/xtensa-esp32-elf-clang/lib/`
+
