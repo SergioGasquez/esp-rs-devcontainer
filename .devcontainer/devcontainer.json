@@ -23,9 +23,12 @@
 		"mutantdino.resourcemonitor",
 		"yzhang.markdown-all-in-one"
 	],
-	"postStartCommand": "cargo generate --git https://github.com/esp-rs/esp-idf-template cargo",
-	"remoteUser": "vscode",
+	// Uncoment in order to use flash from contianer using Podman
+	// "runArgs": ["--userns=keep-id", "--device", "/dev/ttyUSB0", "--security-opt", "label=disable", "--annotation", "run.oci.keep_original_groups=1"],
+
+	// Uncoment to generate a template project every time the container runs
+	// "postStartCommand": "cargo generate --git https://github.com/esp-rs/esp-idf-template cargo",
 	"containerUser": "vscode",
-	"workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/dev,type=bind,consistency=cached",
-	"workspaceFolder": "/home/vscode/dev/"
+	"workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/workspace,type=bind,consistency=cached",
+	"workspaceFolder": "/home/vscode/workspace/"
 }
