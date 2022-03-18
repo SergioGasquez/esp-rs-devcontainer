@@ -1,6 +1,6 @@
 {
 	"name": "esp-rs-env",
-	"image": "sergiogasquez/esp-rs-env",
+	"image": "docker.io/sergiogasquez/esp-rs-env",
 	"settings": {
 		"editor.formatOnPaste": true,
     	"editor.formatOnSave": true,
