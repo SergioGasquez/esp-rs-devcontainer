@@ -59,9 +59,6 @@ allows us to save the generated image in the disk instead of flashing to device:
 
 `cargo +esp espflash save-image --release <imageName>.bin`
 
-`export ESP_IDF_TOOLS_INSTALL_DIR=global && export ESP_IDF_VERSION=v4.4`
-
-
 ## Flash
 Since the local repository folder is syncronized with the container /home/vscode/dev folder,
 you can accress the generated image of your application from the local repository folder.
