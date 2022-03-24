@@ -64,7 +64,7 @@ is not `linux/amd64`.
      - `cargo generate --git https://github.com/esp-rs/esp-idf-template cargo
        --define espidfver=$ESP_IDF_VER --define mcu=$ESP_BOARD` if using a
        board version tag.
-
+    > There is also a `no_std` template project: https://github.com/esp-rs/esp-template
 
 
 ## Build
