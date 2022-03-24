@@ -56,11 +56,16 @@ is not `linux/amd64`.
    `Reopen in Container`
 2. Wait for the container to build and run, once the container is running, you
    should have a working environment to develop ESP boards using Rust
-   - If you want to generate an application using the [esp-idf-template](https://github.com/esp-rs/esp-idf-template) use
-`cargo generate --git https://github.com/esp-rs/esp-idf-template cargo
-`
- or, if you are using an environment with an installed esp-idf, `cargo generate --git https://github.com/esp-rs/esp-idf-template cargo
---define espidfver=$ESP_IDF_VERSION` 
+   - If you want to generate an application using the [esp-idf-template](https://github.com/esp-rs/esp-idf-template) use:
+     - `cargo generate --git https://github.com/esp-rs/esp-idf-template cargo`
+       if using a base tag.
+     - `cargo generate --git https://github.com/esp-rs/esp-idf-template cargo
+       --define espidfver=$ESP_IDF_VER` if using an espidf version tag.
+     - `cargo generate --git https://github.com/esp-rs/esp-idf-template cargo
+       --define espidfver=$ESP_IDF_VER --define mcu=$ESP_BOARD` if using a
+       board version tag.
+
+
 
 ## Build
 Using [cargo-espflash](https://github.com/esp-rs/espflash) tool is recommended

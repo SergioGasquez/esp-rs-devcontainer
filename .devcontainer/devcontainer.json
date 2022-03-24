@@ -1,6 +1,8 @@
 {
 	"name": "esp-rs-env",
-	// Select the proper tag [base, espidf_v5.0, espidf_v4.4, espidf_v4.3.2]
+	// Select the proper tag: [base, espidf_v5.0, espidf_v4.4, espidf_v4.3.2,
+	// xtensa-base, riscv-base, esp32, esp32s2, esp32s3, esp32c3]. For more
+	// information, refer to https://github.com/SergioGasquez/esp-rs-container
 	"image": "docker.io/sergiogasquez/esp-rs-env:base",
 	"settings": {
 		"editor.formatOnPaste": true,
