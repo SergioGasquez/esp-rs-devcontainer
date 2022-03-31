@@ -6,8 +6,13 @@ boards using Rust](https://github.com/esp-rs), it also provides integration with
 
 - [Quick Start](#quick-start)
   - [Requirements](#requirements)
+  - [Setup](#setup)
+    - [[Optional] Podman](#optional-podman)
+    - [General](#general)
+  - [Running the container](#running-the-container)
   - [Build](#build)
   - [Flash](#flash)
+    - [Cargo espflash](#cargo-espflash)
     - [Adafruit ESPTool](#adafruit-esptool)
   - [Monitor](#monitor)
 
@@ -25,20 +30,31 @@ There are two ways of using this repository:
 has requires fewer configurations.
 - Using Podman: allows flashing ESP boards but requires further configurations.
 
-Once the method is chosen, install the selected container tooling application and
-in the case of using Podman proceed with the following:
-1. Uncomment the `runArgs` line from `devcontianer.json`:
+Once the method is chosen, install the selected container tooling application.
+
+### [Optional] Podman
+
+In case of using Podman, proceed with the following:
+1. If using mac OS, we need to initialize the VM allowing the container to be mounted:
+
+   ```
+   podman machine init -v <pathToEspRsDevcontainer>:/<pathToBeMounted>
+   ```
+   More information in [containers/podman#8016 (comment)](https://github.com/containers/podman/issues/8016#issuecomment-1074889051)
+2. Uncomment the `runArgs` line from `devcontianer.json`:
     ```
     "runArgs": ["--userns=keep-id", "--device", "/dev/ttyUSB0", "--security-opt", "label=disable", "--annotation", "run.oci.keep_original_groups=1"],
     ```
     - Edit the device argument to match the serial port of your target device
-2. Edit Visual Code Settings, there are 2 ways of doing this: 
+3. Edit Visual Code Settings, there are 2 ways of doing this:
     -  UI: In _Extension>Remote-Containers_ set `Remote›Containers:Docker Path`
   to `podman`
     -  JSON: Add the following line:
         ```
         "remote.containers.dockerPath": "podman",
         ```
+
+### General
 
 Select which tag of the [sergiogasquez/esp-rs-env](https://hub.docker.com/repository/docker/sergiogasquez/esp-rs-env)
 image you would like to use by modifying the `image` property in
