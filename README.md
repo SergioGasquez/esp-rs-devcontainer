@@ -46,10 +46,10 @@ In case of using Podman, proceed with the following:
     "runArgs": ["--userns=keep-id", "--device", "/dev/ttyUSB0", "--security-opt", "label=disable", "--annotation", "run.oci.keep_original_groups=1"],
     ```
     - Edit the device argument to match the serial port of your target device
-3. Edit Visual Code Settings, there are 2 ways of doing this:
-    -  UI: In _Extension>Remote-Containers_ set `Remote›Containers:Docker Path`
+3. Edit Visual Code Settings:
+    -  Via UI: In _Extension>Remote-Containers_ set `Remote›Containers:Docker Path`
   to `podman`
-    -  JSON: Add the following line:
+    -  Via JSON: Add the following line:
         ```
         "remote.containers.dockerPath": "podman",
         ```
