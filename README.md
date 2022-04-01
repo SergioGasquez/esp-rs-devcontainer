@@ -23,13 +23,19 @@ This repository is intended to be used with Visual Studio Code, using the
 - [Visual Studio Code](https://code.visualstudio.com/download)
   - [Remote - Container Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 - [Docker](https://docs.docker.com/get-docker/) or [Podman](https://podman.io/getting-started/installation)
-
 ## Setup
 There are two ways of using this repository:
 - Using Docker: does not allow flashing ESP boards from the container but
 has requires fewer configurations.
 - Using Podman: allows flashing ESP boards but requires further configurations.
-
+> Tested working configurations:
+> - Linux:
+>   - Podman
+>   - Docker
+> - Windows - WSL2:
+>   - Docker
+> - Mac (ARM):
+>   - Docker
 Once the method is chosen, install the selected container tooling application.
 
 ### [Optional] Podman
@@ -101,7 +107,7 @@ Since the local repository folder is synchronized with the container `/home/vsco
 1. Open the [Adafruit ESPTool](https://adafruit.github.io/Adafruit_WebSerial_ESPTool/) flashing tool.
 1. Choose the desired baudrate.
 2. Connect to the serial port of the ESP board.
-3. Upload the bootloader file, the partition table and the generated 
+3. Upload the bootloader file, the partition table and the generated
 application image binary and select the proper offset.
 > Default bootloader files and partition tables can be found under the `config-files` folder.
 
