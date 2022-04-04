@@ -15,6 +15,8 @@ boards using Rust](https://github.com/esp-rs), it also provides integration with
     - [Cargo espflash](#cargo-espflash)
     - [Adafruit ESPTool](#adafruit-esptool)
   - [Monitor](#monitor)
+    - [ESPMonitor](#espmonitor)
+    - [Online Serial Monitor](#online-serial-monitor)
 
 # Quick Start
 This repository is intended to be used with Visual Studio Code, using the
@@ -120,8 +122,12 @@ Default Offsets:
 | **esp32c3** |       0x0      |        0x8000       |        0x10000        |
 
 ## Monitor
-If using Podman, `cargo espflash --monitor` can be used from the container.
 
+If using Podman, `cargo espflash --monitor` can be used from the container.
+### ESPMonitor
 You can use [espmonitor](https://github.com/esp-rs/espmonitor) from your local
 environment to monitor the output of your ESP board: `espmonitor /dev/<serialPort>`
 
+### Online Serial Monitor
+Using an online serial monitors, like [Serial Terminal](https://serial.huhn.me/),
+is also an option.
