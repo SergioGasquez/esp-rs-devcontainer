@@ -7,7 +7,7 @@
         "cd ${relativeFileDirname}/.. &&",
         "cargo espflash --release save-image app.bin &&",
         "cd ${workspaceFolder} &&",
-        "python wokwi-server.py"
+        "python /home/vscode/workspace/wokwi-server.py"
       ],
       "problemMatcher": [
         "$rustc"
