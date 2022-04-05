@@ -26,9 +26,9 @@ async def hello(websocket, path):
         "type": "start",
         "elf": base64_file('blink.elf'),
         "espBin": [
-            [0x1000, base64_file('config-files/esp32_bootloader.bin')],
-            [0x8000, base64_file('config-files/esp32_partition-table.bin')],
-            [0x10000, base64_file('websocket-test/app.bin')],
+            [0x1000, base64_file('/home/vscode/workspace/config-files/esp32_bootloader.bin')],
+            [0x8000, base64_file('/home/vscode/workspace/config-files/esp32_partition-table.bin')],
+            [0x10000, base64_file('/home/vscode/workspace/websocket-test/app.bin')],
         ]
     }))
 
