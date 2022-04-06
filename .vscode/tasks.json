@@ -6,13 +6,29 @@
       "command": [
         "cd ${relativeFileDirname}/.. &&",
         "cargo espflash --release save-image app.bin &&",
-        "cd ${workspaceFolder} &&",
-        "python /home/vscode/workspace/wokwi-server.py"
+        "pip3 install -r $HOME/workspace/requirements.txt &&",
+        "python3 $HOME/workspace/wokwi-server-esp32c3.py"
       ],
       "problemMatcher": [
         "$rustc"
       ],
-      "label": "ESP: Generate binary and launch server",
+      "label": "ESP: Generate binary and launch Wokwi",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "shell",
+      "command": [
+        "cd ${relativeFileDirname}/.. &&",
+        "cargo espflash --release save-image app.bin &&",
+        "xdg-open https://sergiogasquez.github.io/esp-rs-devcontainer/flash"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ],
+      "label": "ESP: Generate binary and open online flash tool",
       "group": {
         "kind": "build",
         "isDefault": true
