@@ -4,7 +4,7 @@ import asyncio
 import base64
 import json
 import sys
-
+import os
 import websockets
 import webbrowser
 
@@ -24,11 +24,11 @@ async def hello(websocket, path):
     # Send the simulation payload
     await websocket.send(json.dumps({
         "type": "start",
-        "elf": base64_file('blink.elf'),
+        "elf": base64_file('{}/wokwi/dummy.elf'.format(os.getcwd())),
         "espBin": [
-            [0x1000, base64_file('/home/vscode/workspace/config-files/esp32_bootloader.bin')],
-            [0x8000, base64_file('/home/vscode/workspace/config-files/esp32_partition-table.bin')],
-            [0x10000, base64_file('/home/vscode/workspace/websocket-test/app.bin')],
+            [0x0000, base64_file('{}/config-files/{}_bootloader.bin'.format(os.getcwd(), os.getenv('ESP_BOARD')))],
+            [0x8000, base64_file('{}/config-files/{}_partition-table.bin'.format(os.getcwd(), os.getenv('ESP_BOARD')))],
+            [0x10000, base64_file('{}/app.bin'.format(os.getenv('CURRENT_PROJECT')))],
         ]
     }))
 
@@ -41,13 +41,19 @@ async def hello(websocket, path):
         else:
             print("> {}".format(msg))
 
-
 start_server = websockets.serve(hello, "127.0.0.1", PORT)
-
 asyncio.get_event_loop().run_until_complete(start_server)
-url = "https://wokwi.com/_alpha/wembed/327866241856307794?partner=espressif&port={}&data=demo".format(PORT)
+board = 325149339656651346
+if os.getenv('ESP_BOARD') == "esp32c3":
+    board = 325149339656651346
+elif os.getenv('ESP_BOARD') == "esp32c3-rust":
+    board = 328638850887844436
+# else :
+#     return 1
+
+url = "https://wokwi.com/_alpha/wembed/{}?partner=espressif&port={}&data=demo".format(board,PORT)
 print("Web socket listening on port {}".format(PORT))
 print("")
-print("Now go to https://wokwi.com/_alpha/wembed/327866241856307794?partner=espressif&port={}&data=demo".format(PORT))
+print("Please, open the following URL: {}".format(url))
 webbrowser.open(url)
 asyncio.get_event_loop().run_forever()

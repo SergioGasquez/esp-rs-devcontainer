@@ -6,13 +6,12 @@
       "command": [
         "cd ${relativeFileDirname}/.. &&",
         "cargo espflash --release save-image app.bin &&",
-        "cd ${workspaceFolder} &&",
-        "python /home/vscode/workspace/wokwi-server.py"
+        "python3 $HOME/workspace/wokwi/wokwi-server.py"
       ],
       "problemMatcher": [
         "$rustc"
       ],
-      "label": "ESP: Generate binary and launch server",
+      "label": "Build and run Wokwi simulation: Focused project",
       "group": {
         "kind": "build",
         "isDefault": true
