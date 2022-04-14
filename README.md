@@ -18,58 +18,40 @@ boards using Rust](https://github.com/esp-rs), it also provides integration with
     - [ESPMonitor](#espmonitor)
     - [Online Serial Monitor](#online-serial-monitor)
 
-# Quick Start
-This repository is intended to be used with Visual Studio Code, using the
-`Remote - Container` extension.
+# Setup
+
 ## Requirements
 - [Visual Studio Code](https://code.visualstudio.com/download)
   - [Remote - Container Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-- [Docker](https://docs.docker.com/get-docker/) or [Podman](https://podman.io/getting-started/installation)
-## Setup
-There are two ways of using this repository:
-- Using Docker: does not allow flashing ESP boards from the container but
-has requires fewer configurations.
-- Using Podman: allows flashing ESP boards but requires further configurations.
-> Tested working configurations:
-> - Linux:
->   - Podman
->   - Docker
-> - Windows - WSL2:
->   - Docker
-> - Mac (ARM):
->   - Docker
-Once the method is chosen, install the selected container tooling application.
-
-### [Optional] Podman
-
-In case of using Podman, proceed with the following:
-1. If using mac OS, we need to initialize the VM allowing the container to be mounted:
-
-   ```
-   podman machine init -v <pathToEspRsDevcontainer>:/<pathToBeMounted>
-   ```
-   More information in [containers/podman#8016 (comment)](https://github.com/containers/podman/issues/8016#issuecomment-1074889051)
-2. Uncomment the `runArgs` line from `devcontianer.json`:
-    ```
-    "runArgs": ["--userns=keep-id", "--device", "/dev/ttyUSB0", "--security-opt", "label=disable", "--annotation", "run.oci.keep_original_groups=1"],
-    ```
-    - Edit the device argument to match the serial port of your target device
-3. Edit Visual Code Settings:
-    -  Via UI: In _Extension>Remote-Containers_ set `Remote›Containers:Docker Path`
-  to `podman`
-    -  Via JSON: Add the following line:
-        ```
-        "remote.containers.dockerPath": "podman",
-        ```
+- [Docker](https://docs.docker.com/get-docker/)
+> ### Using Podman instead of Docker
+> Using Podman as conatiner tool is possible when using a Linux host machine.
+> When using Podman, flashing devices from the container is possible.
+> 
+> > There has been some testing using Lima and Podman in others platforms but with
+> > no sucess so far. Feel free to test with them and report any feeback.
+> #### Requirements
+>   - [Install Podman](https://podman.io/getting-started/installation)
+>   -  Uncomment the `runArgs` line from `devcontianer.json`:
+>   
+>       ```
+>       "runArgs": ["--userns=keep-id", "--device", "/dev/ttyUSB0", "--security-opt", "label=disable", "--annotation", "run.oci.keep_original_groups=1"],
+>       ```
+>      - Edit the device argument to match the serial port of your board.
+>   - Edit Visual Code Settings:
+>     -  Via UI: In _Extension>Remote-Containers_ set `Remote›Containers:Docker Path`
+>   to `podman`
+>     -  Via JSON: Add the following line:
+>         ```
+>         "remote.containers.dockerPath": "podman",
+>         ```
 
 ### General
-
-Select which tag of the [sergiogasquez/esp-rs-env](https://hub.docker.com/repository/docker/sergiogasquez/esp-rs-env)
+Select the tag of the [sergiogasquez/esp-rs-env](https://hub.docker.com/repository/docker/sergiogasquez/esp-rs-env)
 image you would like to use by modifying the `image` property in
 `devcontainer.json`.
-For more information regarding the images tag, refer to [esp-rs-container](https://github.com/SergioGasquez/esp-rs-container)
-> Using a tag with a prebuilt esp-idf environment is recommended if the host device
-is not `linux/amd64`.
+For more information regarding the image tags, refer to [esp-rs-container](https://github.com/SergioGasquez/esp-rs-container).
+
 
 ## Running the container
 1. Open the folder with Visual Studio Code and open the container, there are
@@ -82,52 +64,39 @@ is not `linux/amd64`.
    should have a working environment to develop ESP boards using Rust
    - If you want to generate an application using the [esp-idf-template](https://github.com/esp-rs/esp-idf-template) use:
      - `cargo generate --git https://github.com/esp-rs/esp-idf-template cargo`
-       if using a base tag.
-     - `cargo generate --git https://github.com/esp-rs/esp-idf-template cargo
-       --define espidfver=$ESP_IDF_VER` if using an espidf version tag.
-     - `cargo generate --git https://github.com/esp-rs/esp-idf-template cargo
-       --define espidfver=$ESP_IDF_VER --define mcu=$ESP_BOARD` if using a
-       board version tag.
     > There is also a `no_std` template project: https://github.com/esp-rs/esp-template
 
+    > Be sure to match the enviroment in the selected image tag (espidf version and board)
 
 ## Build
 Using [cargo-espflash](https://github.com/esp-rs/espflash) tool is recommended
 since it allows to save the generated image in the disk or flash the resulting binary
 to the board.
-> Note that flashing from the container only available when using Podman
 
+`cargo build` is also available and it generates the resulting application under
+target folder
 
 ## Flash
+Any method of flashing ESP boards from your host device should also work.
 
 ### Cargo espflash
-If using Podman, [cargo espflash](https://github.com/esp-rs/espflash/tree/master/cargo-espflash) can be used to flash the ESP board as in native environments.
+
+> As mentioned before, if using Podman, [cargo espflash](https://github.com/esp-rs/espflash/tree/master/cargo-espflash) can be used to flash the ESP board from the container.
 ### [Adafruit ESPTool](https://adafruit.github.io/Adafruit_WebSerial_ESPTool/)
 WebSerial ESPTool is designed to be a web-capable option for programming ESP boards.
 
-Since the local repository folder is synchronized with the container `/home/vscode/workspace` folder, if `cargo espflash save-image` was used, the generated binary of your application can be accessed from the local repository folder.
-1. Open the [Adafruit ESPTool](https://adafruit.github.io/Adafruit_WebSerial_ESPTool/) flashing tool.
-1. Choose the desired baudrate.
-2. Connect to the serial port of the ESP board.
-3. Upload the bootloader file, the partition table and the generated
-application image binary and select the proper offset.
-> Default bootloader files and partition tables can be found under the `config-files` folder.
+Since the local repository folder is synchronized with the container `~/workspace` folder, we recommend using `cargo espflash save-image --merge <appName>.bin ` to generate a binary.
 
-Default Offsets:
-|             | **Bootloader** | **Partition Table** | **Application Image** |
-|:-----------:|:--------------:|:-------------------:|:---------------------:|
-|  **esp32**  |       0x0      |        0x8000       |        0x10000        |
-| **esp32s2** |       0x0      |        0x8000       |        0x10000        |
-| **esp32s3** |       0x0      |        0x8000       |        0x10000        |
-| **esp32c3** |       0x0      |        0x8000       |        0x10000        |
+In orfer to flash it:
+1. Open the [Adafruit ESPTool](https://adafruit.github.io/Adafruit_WebSerial_ESPTool/) flashing tool.
+2. Choose the desired baudrate.
+3. Connect to the serial port of the ESP board.
+4. Upload the generated binary.
 
 ## Monitor
+Any serial monitor used from your host device works, like [espmonitor](https://github.com/esp-rs/espmonitor).
 
-If using Podman, `cargo espflash --monitor` can be used from the container.
-### ESPMonitor
-You can use [espmonitor](https://github.com/esp-rs/espmonitor) from your local
-environment to monitor the output of your ESP board: `espmonitor /dev/<serialPort>`
+> Using Podman also allows using the argument `--monitor` of cargo-espflash.
 
 ### Online Serial Monitor
-Using an online serial monitors, like [Serial Terminal](https://serial.huhn.me/),
-is also an option.
+Using an online serial monitor is also an option [Serial Terminal](https://serial.huhn.me/) working fine in [some browsers](https://developer.mozilla.org/en-US/docs/Web/API/Serial#browser_compatibility).
