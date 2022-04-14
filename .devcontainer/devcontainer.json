@@ -1,9 +1,8 @@
 {
   "name": "esp-rs-env",
-  // Select the proper tag: [base, espidf_v5.0, espidf_v4.4, espidf_v4.3.2,
-  // xtensa-base, riscv-base, esp32, esp32s2, esp32s3, esp32c3]. For more
-  // information, refer to https://github.com/SergioGasquez/esp-rs-container
-  "image": "docker.io/sergiogasquez/esp-rs-env:wokwi",
+  // Select the proper tag: refer to https://github.com/SergioGasquez/esp-rs-container
+  // for more information about tags
+  "image": "docker.io/sergiogasquez/esp-rs-env:base",
   "settings": {
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
@@ -27,19 +26,10 @@
     "yzhang.markdown-all-in-one"
   ],
   // Uncomment if using Podman and choose the proper device
-  "runArgs": [
-    // "--userns=keep-id",
-    // "--device",
-    // "/dev/ttyUSB0",
-    // "--security-opt",
-    // "label=disable",
-    // "--annotation",
-    // "run.oci.keep_original_groups=1"
-  ],
+  // "runArgs": ["--userns=keep-id", "--device", "/dev/ttyUSB0", "--security-opt", "label=disable", "--annotation", "run.oci.keep_original_groups=1"],
   "forwardPorts": [
     9012
   ],
-  "containerUser": "vscode",
-  "workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/workspace,type=bind,consistency=cached",
-  "workspaceFolder": "/home/vscode/workspace/"
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/esp/workspace,type=bind,consistency=cached",
+  "workspaceFolder": "/home/esp/workspace/"
 }
