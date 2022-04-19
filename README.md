@@ -7,10 +7,8 @@ Developing porjects for ESP boards in an online environment is also available wi
 
 ## Table of Contents
 
-- [Quick Start](#quick-start)
+- [Setup](#setup)
   - [Requirements](#requirements)
-  - [Setup](#setup)
-    - [[Optional] Podman](#optional-podman)
     - [General](#general)
   - [Running the container](#running-the-container)
   - [Build](#build)
@@ -18,7 +16,6 @@ Developing porjects for ESP boards in an online environment is also available wi
     - [Cargo espflash](#cargo-espflash)
     - [Adafruit ESPTool](#adafruit-esptool)
   - [Monitor](#monitor)
-    - [ESPMonitor](#espmonitor)
     - [Online Serial Monitor](#online-serial-monitor)
 
 # Quick Start
