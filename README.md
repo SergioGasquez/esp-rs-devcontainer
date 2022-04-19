@@ -2,14 +2,18 @@
 This repository uses a container to offer the environment needed to develop applications for [ESP
 boards using Rust](https://github.com/esp-rs), it also provides integration with Visual Studio Code using [remote containers](https://code.visualstudio.com/docs/remote/containers).
 
+For instructions on how to ingrate devcontainers to existing repositories, see
+[this section](#integrating-devcontainer-in-existing-repositories).
+
 Developing porjects for ESP boards in an online environment is also available with [Gitpod](https://www.gitpod.io/):
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/github.com/SergioGasquez/esp-rs-devcontainer/)
 
 ## Table of Contents
 
-- [Setup](#setup)
+
+- [Quick Start](#quick-start)
   - [Requirements](#requirements)
-    - [General](#general)
+  - [Setup](#setup)
   - [Running the container](#running-the-container)
   - [Build](#build)
   - [Flash](#flash)
@@ -17,6 +21,8 @@ Developing porjects for ESP boards in an online environment is also available wi
     - [Adafruit ESPTool](#adafruit-esptool)
   - [Monitor](#monitor)
     - [Online Serial Monitor](#online-serial-monitor)
+- [Wokwi Simulator](#wokwi-simulator)
+- [Integrating devcontainer in existing repositories](#integrating-devcontainer-in-existing-repositories)
 
 # Quick Start
 
@@ -46,7 +52,7 @@ Developing porjects for ESP boards in an online environment is also available wi
 >         "remote.containers.dockerPath": "podman",
 >         ```
 
-### Setup
+## Setup
 Select the tag of the [sergiogasquez/esp-rs-env](https://hub.docker.com/repository/docker/sergiogasquez/esp-rs-env)
 image you would like to use by modifying the `image` property in
 `devcontainer.json`.
@@ -123,3 +129,18 @@ A task is provided via `.vscode/tasks.json` to facilitate executing the script:
 
 
 > When using Gitpod online enviroment, VScode tasks are not available.
+
+# Integrating devcontainer in existing repositories
+In order to add devcontainer features to an existing repository:
+1. Copy the `.devcontainer` folder to your repository.
+2. Edit the `image` property of `devcontainer.json` with you desired tag.
+3. For Gitpod support, copy the `.gitpod.yml` file.
+   - For instructions about how to add a "Open in Gitpod" button, see their
+      [official documentation](https://www.gitpod.io/docs/getting-started#open-in-gitpod-button)
+4. If you also want to add Wokwi Simulation support:
+   - Copy the `wokwi`folder.
+   - Use the run.sh script to run simulations, for detailed information on how
+  to properly execute it, see [Wokwi Simulator](#wokwi-simulator) Section.
+5. If you want to upload code to your board with Adafruit online tool or use Woksi
+   simulator, you would also require copiying the `config-files` folder. Feel free,
+   to copy only the file of your target board.
