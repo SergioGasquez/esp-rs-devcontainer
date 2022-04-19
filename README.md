@@ -2,6 +2,9 @@
 This repository uses a container to offer the environment needed to develop applications for [ESP
 boards using Rust](https://github.com/esp-rs), it also provides integration with Visual Studio Code using [remote containers](https://code.visualstudio.com/docs/remote/containers).
 
+Developing porjects for ESP boards in an online environment is also available with [Gitpod](https://www.gitpod.io/):
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/github.com/SergioGasquez/esp-rs-devcontainer/)
+
 ## Table of Contents
 
 - [Quick Start](#quick-start)
@@ -18,7 +21,7 @@ boards using Rust](https://github.com/esp-rs), it also provides integration with
     - [ESPMonitor](#espmonitor)
     - [Online Serial Monitor](#online-serial-monitor)
 
-# Setup
+# Quick Start
 
 ## Requirements
 - [Visual Studio Code](https://code.visualstudio.com/download)
@@ -33,7 +36,7 @@ boards using Rust](https://github.com/esp-rs), it also provides integration with
 > #### Requirements
 >   - [Install Podman](https://podman.io/getting-started/installation)
 >   -  Uncomment the `runArgs` line from `devcontianer.json`:
->   
+>
 >       ```
 >       "runArgs": ["--userns=keep-id", "--device", "/dev/ttyUSB0", "--security-opt", "label=disable", "--annotation", "run.oci.keep_original_groups=1"],
 >       ```
@@ -46,7 +49,7 @@ boards using Rust](https://github.com/esp-rs), it also provides integration with
 >         "remote.containers.dockerPath": "podman",
 >         ```
 
-### General
+### Setup
 Select the tag of the [sergiogasquez/esp-rs-env](https://hub.docker.com/repository/docker/sergiogasquez/esp-rs-env)
 image you would like to use by modifying the `image` property in
 `devcontainer.json`.
@@ -100,3 +103,26 @@ Any serial monitor used from your host device works, like [espmonitor](https://g
 
 ### Online Serial Monitor
 Using an online serial monitor is also an option [Serial Terminal](https://serial.huhn.me/) working fine in [some browsers](https://developer.mozilla.org/en-US/docs/Web/API/Serial#browser_compatibility).
+
+# Wokwi Simulator
+The devcontainer includes the option of simulating the exercises with [Wokwi](https://wokwi.com/).
+
+In order to build and run a Wokwi simulation, a script, `run.sh`, under the
+`wokwi` folder, is provided to build and run the Wokwi simulation, in order
+to use it:
+1. Set the `ESP_BOARD` enviroment variable:
+   `$ export ESP_BOARD=<target>`. Possible values of `<target>` are:
+   - `esp32`: ESP32 DevKit V1
+   - `esp32c3`: ESP32 C3 DevKit M1
+   - `esp32c3-rust`: [Rust ESP Board](https://github.com/esp-rs/esp-rust-board)
+2. Set the `CURRENT_PROJECT` environment variable:
+   `$ export CURRENT_PROJECT=<project>`.Pointing to your project folder.
+3. Run the bash script: `$ bash wokwi/run.sh`
+
+A task is provided via `.vscode/tasks.json` to facilitate executing the script:
+1. Execute the task `Build and run Wokwi simulation`
+   1. Set the `CURRENT_PROJECT` pointing to the your project.
+   2. Select your `ESP_BOARD`.
+
+
+> When using Gitpod online enviroment, VScode tasks are not available.

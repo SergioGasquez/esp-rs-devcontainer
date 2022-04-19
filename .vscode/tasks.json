@@ -1,0 +1,41 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "command": [
+        "export CURRENT_PROJECT=${input:CURRENT_PROJECT} &&",
+        "export ESP_BOARD=${input:ESP_BOARD} &&",
+        "cd ${workspaceFolder} &&",
+        "bash wokwi/run.sh"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ],
+      "label": "Build and run Wokwi simulation",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+  ],
+  "inputs": [
+    {
+      "description": "Choose your ESP target:",
+      "id": "ESP_BOARD",
+      "type": "pickString",
+      "options": [
+        "esp32",
+        "esp32c3",
+        "esp32c3-rust",
+      ],
+      "default": "esp32c3"
+    },
+    {
+      "type": "promptString",
+      "id": "CURRENT_PROJECT",
+      "description": "Relative path to your project folder:",
+      "default": ""
+    }
+  ]
+}
