@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-if [ "$USER" = "esp" ]; then
+if [ `whoami` == "esp" ]; then
 path="/home/esp/workspace"
 else
 path="/workspace/esp-rs-devcontainer"

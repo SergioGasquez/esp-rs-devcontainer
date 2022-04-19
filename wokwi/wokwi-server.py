@@ -48,6 +48,8 @@ if os.getenv('ESP_BOARD') == "esp32c3":
     board = 325149339656651346
 elif os.getenv('ESP_BOARD') == "esp32c3-rust":
     board = 328638850887844436
+elif os.getenv('ESP_BOARD') == "esp32":
+    board = 326364399101018706
 # else :
 #     return 1
 
