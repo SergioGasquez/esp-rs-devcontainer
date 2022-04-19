@@ -112,22 +112,17 @@ In order to build and run a Wokwi simulation, a script, `run.sh`, under the
 to use it:
 1. Set the `ESP_BOARD` enviroment variable:
    `$ export ESP_BOARD=<target>`. Possible values of `<target>` are:
+   - `esp32`: ESP32 DevKit V1
    - `esp32c3`: ESP32 C3 DevKit M1
-   - `rust-board`: [Rust ESP Board](https://github.com/esp-rs/esp-rust-board)
+   - `esp32c3-rust`: [Rust ESP Board](https://github.com/esp-rs/esp-rust-board)
 2. Set the `CURRENT_PROJECT` environment variable:
    `$ export CURRENT_PROJECT=<project>`.Pointing to your project folder.
 3. Run the bash script: `$ bash wokwi/run.sh`
 
 A task is provided via `.vscode/tasks.json` to facilitate executing the script:
-1. Set the `ESP_BOARD` enviroment variable:
-   `$ export ESP_BOARD=<target>`. Possible values of `<target>` are:
-   - `esp32c3`: ESP32 C3 DevKit M1
-   - `esp32c3-rust`: [Rust ESP Board](https://github.com/esp-rs/esp-rust-board)
-2. Set the `CURRENT_PROJECT` environment variable:
-   `$ export CURRENT_PROJECT=<project>`.Pointing to your project folder.
-3. Run `Build and run Wokwi simulationt` task: 
-    - From the [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) (`Ctrl-Shift-P` or `Cmd-Shift-P`) run the `Tasks: Run Build Task` command
-    - `Terminal`-> `Run Build Task` in the menu.
-    - `Ctrl-Shift-B` or `Cmd-Shift-B`
+1. Execute the task `Build and run Wokwi simulation`
+   1. Set the `CURRENT_PROJECT` pointing to the your project.
+   2. Select your `ESP_BOARD`.
+
 
 > When using Gitpod online enviroment, VScode tasks are not available.
