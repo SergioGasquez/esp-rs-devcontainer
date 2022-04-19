@@ -8,8 +8,9 @@ For instructions on how to ingrate devcontainers to existing repositories, see
 Developing porjects for ESP boards in an online environment is also available with [Gitpod](https://www.gitpod.io/):
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/github.com/SergioGasquez/esp-rs-devcontainer/)
 
-## Table of Contents
+This repository is can be used as template repository.
 
+## Table of Contents
 
 - [Quick Start](#quick-start)
   - [Requirements](#requirements)
