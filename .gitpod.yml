@@ -1,6 +1,6 @@
 # Select the proper tag: refer to https://github.com/SergioGasquez/esp-rs-container
 # for more information about tags
-image: sergiogasquez/esp-rs-env:esp32c3-training
+image: sergiogasquez/esp-rs-env:base
 tasks:
   - name: Adopt environment in the container image to gitpod user
     command: |
@@ -16,5 +16,6 @@ vscode:
     - vadimcn.vscode-lldb
     - anwar.resourcemonitor
     - yzhang.markdown-all-in-one
-# ports:
-#   - port: 9012
+ports:
+  - port: 9012
+    visibility: public
