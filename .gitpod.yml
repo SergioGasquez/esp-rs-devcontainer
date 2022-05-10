@@ -1,14 +1,9 @@
-# Select the proper tag: refer to https://github.com/SergioGasquez/esp-rs-container
-# for more information about tags
-image: sergiogasquez/esp-rs-env:esp32c3-training
+image:
+  file: .gitpod.Dockerfile
 tasks:
-  - name: Adopt environment in the container image to gitpod user
-    command: |
-      ln -s /home/esp/.rustup /home/gitpod/.rustup
-      mkdir /home/gitpod/.cargo
-      ln -s /home/esp/.cargo/bin /home/gitpod/.cargo/bin
-      ln -s /home/esp/.cargo/env /home/gitpod/.cargo/env
-      source /home/gitpod/.cargo/env
+ - name: Setup environment variables for ESP-IDF
+   command: |
+     source /home/gitpod/.espressif/frameworks/esp-idf-v4.4/export.sh > /dev/null 2>&1
 vscode:
   extensions:
     - matklad.rust-analyzer
@@ -16,5 +11,7 @@ vscode:
     - vadimcn.vscode-lldb
     - anwar.resourcemonitor
     - yzhang.markdown-all-in-one
-# ports:
-#   - port: 9012
+    - serayuzgur.crates
+ports:
+  - port: 9012
+    visibility: public
