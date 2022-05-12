@@ -67,7 +67,7 @@ For more information regarding the image tags, refer to [esp-rs-container](https
 
 1. Open the folder with Visual Studio Code and open the container, there are
    several ways to open the container:
-   1. When opening Visual Studio Code, a popup will come up asking to open reopen the folder in a Container, click `Yes`
+   1. When opening Visual Studio Code, a popup will come up asking to open reopen the folder in a Container, click `Reopen in Container`
    1. Open the [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) and select `Remote-Containers: Reopen in Container`
    2. Use the open in a remote window button on the bottom left corner to
    `Reopen in Container`
