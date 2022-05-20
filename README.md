@@ -89,7 +89,7 @@ to the board.
 target folder
 
 ## Flash
-Any method of flashing ESP boards from your host device should also work.
+Any flashing method from your host device should work.
 
 ### Cargo espflash
 
