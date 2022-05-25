@@ -11,7 +11,7 @@ tasks:
       source /home/gitpod/.cargo/env
 vscode:
   extensions:
-    - matklad.rust-analyzer
+    - rust-lang.rust-analyzer
     - tamasfe.even-better-toml
     - vadimcn.vscode-lldb
     - anwar.resourcemonitor
