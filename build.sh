@@ -1,15 +1,22 @@
 #!/bin/bash
 
 # Gitpod and VsCode Codespaces tasks do not source the user environment
+# TODO: Update project path
 if [ "${USER}" == "gitpod" ]; then
+    export CURRENT_PROJECT=/workspace/esp-rs-devcontainer/your-project-name
     which idf.py >/dev/null || {
         source ~/export-esp.sh > /dev/null 2>&1
     }
 elif [ "${CODESPACE_NAME}" != "" ]; then
+    export CURRENT_PROJECT=/workspaces/esp-rs-devcontainer/your-project-name
     which idf.py >/dev/null || {
         source ~/export-esp.sh > /dev/null 2>&1
     }
+else
+    export CURRENT_PROJECT=~/workspace/esp-rs-devcontainer/your-project-name
 fi
+
+cd $CURRENT_PROJECT
 
 # TODO: Update ESP_BOARD
 export ESP_BOARD="esp32"
@@ -30,10 +37,10 @@ fi
 
 case "$1" in
     ""|"release")
-        cargo "${TOOLCHAIN}" build --target ${ESP_ARCH} --release --features "native"
+        cargo "${TOOLCHAIN}" build --target ${ESP_ARCH} --release
         ;;
     "debug")
-        cargo "${TOOLCHAIN}" build --target ${ESP_ARCH} --features "native"
+        cargo "${TOOLCHAIN}" build --target ${ESP_ARCH}
         ;;
     *)
         echo "Wrong argument. Only \"debug\"/\"release\" arguments are supported"
