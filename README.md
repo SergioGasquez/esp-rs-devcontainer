@@ -1,13 +1,10 @@
 # esp-rs-devcontainer
 
 This repository uses a container to offer the environment needed to develop applications for [ESP
-boards using Rust](https://github.com/esp-rs), it also provides integration with Visual Studio Code using [remote containers](https://code.visualstudio.com/docs/remote/containers).
+boards using Rust](https://github.com/esp-rs), it also provides integration with Visual Studio Code using [remote containers](https://code.visualstudio.com/docs/remote/containers), [GitHub Codespaces](https://docs.github.com/es/codespaces/developing-in-codespaces) and [Gitpod](https://www.gitpod.io/).
 
 For instructions on how to integrate devcontainers to existing repositories, see
 [this section](#integrating-devcontainer-in-existing-repositories).
-
-Developing projects for ESP boards in an online environment is also available with [Gitpod](https://www.gitpod.io/):
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/github.com/SergioGasquez/esp-rs-devcontainer/)
 
 This repository is can be used as template repository.
 
@@ -26,120 +23,111 @@ This repository is can be used as template repository.
 - [Wokwi Simulator](#wokwi-simulator)
 - [Integrating devcontainer in existing repositories](#integrating-devcontainer-in-existing-repositories)
 
-# Quick Start
+# Setup
+The repository supports:
+-  [Gitpod](https://gitpod.io/): [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/github.com/SergioGasquez/esp-rs-devcontainer)
+-  [Vs Code Devcontainers](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-an-existing-folder-in-a-container)
+-  [GitHub Codespaces](https://docs.github.com/en/codespaces/developing-in-codespaces/creating-a-codespace)
+    > **Note**
+    > When using GitHub Codespaces, we need to make the ports
+    > public, [see instructions](https://docs.github.com/en/codespaces/developing-in-codespaces/forwarding-ports-in-your-codespace#sharing-a-port).
 
-## Requirements
-
-- [Visual Studio Code](https://code.visualstudio.com/download)
-  - [Remote - Container Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-- [Docker](https://docs.docker.com/get-docker/)
-> ### Using Podman instead of Docker
-> Using Podman as container tool is possible when using a Linux host machine.
-> When using Podman, flashing devices from the container is possible.
->
-> > There has been some testing using Lima and Podman in other platforms but with
-> > no success so far. Feel free to test with them and report any feedback.
-> #### Requirements
->   - [Install Podman](https://podman.io/getting-started/installation)
->   -  Uncomment the `runArgs` line from `devcontianer.json`:
->
->       ```
->       "runArgs": ["--userns=keep-id", "--device", "/dev/ttyUSB0", "--security-opt", "label=disable", "--annotation", "run.oci.keep_original_groups=1"],
->       ```
->      - Edit the device argument to match the serial port of your board.
->   - Edit Visual Code Settings:
->     -  Via UI: In _Extension>Remote-Containers_ set `Remote›Containers:Docker Path`
->   to `podman`
->     -  Via JSON: Add the following line:
->         ```
->         "remote.containers.dockerPath": "podman",
->         ```
-
-## Setup
-
-Select the tag of the [sergiogasquez/esp-rs-env](https://hub.docker.com/repository/docker/sergiogasquez/esp-rs-env)
-image you would like to use by modifying the `image` property in
-`devcontainer.json`.
-For more information regarding the image tags, refer to [esp-rs-container](https://github.com/SergioGasquez/esp-rs-container).
+Wait for the container to build, once the container is running, you
+should have a working environment to develop ESP boards using Rust.
 
 
-## Running the container
+We reccomend using one of our templates with [cargo-generate](https://github.com/cargo-generate/cargo-generate)(already installed by in the images) as starting project:
+- [esp-idf-template](https://github.com/esp-rs/esp-idf-template): ESP-IDF Template
+  - `cargo generate --vcs none --git https://github.com/esp-rs/esp-idf-template cargo`
+- [esp-template](https://github.com/esp-rs/esp-template): `no_std` template.
+  - `cargo generate https://github.com/esp-rs/esp-template`
 
-1. Open the folder with Visual Studio Code and open the container, there are
-   several ways to open the container:
-   1. When opening Visual Studio Code, a popup will come up asking to open reopen the folder in a Container, click `Reopen in Container`
-   1. Open the [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) and select `Remote-Containers: Reopen in Container`
-   2. Use the open in a remote window button on the bottom left corner to
-   `Reopen in Container`
-2. Wait for the container to build and run, once the container is running, you
-   should have a working environment to develop ESP boards using Rust
-   - If you want to generate an application using the [esp-idf-template](https://github.com/esp-rs/esp-idf-template) use:
-     - `cargo generate --git https://github.com/esp-rs/esp-idf-template cargo`
-    > There is also a `no_std` template project: https://github.com/esp-rs/esp-template
+> Be sure to match the installed environment in the selected image tag (esp-idf version and board)
 
-    > Be sure to match the installed environment in the selected image tag (espidf version and board)
+# Build
+- Terminal approach:
 
-## Build
-
-Using [cargo-espflash](https://github.com/esp-rs/espflash) tool is recommended
-since it allows saving the generated image in the disk or flash the resulting binary
-to the board.
-
-`cargo build` is also available and it generates the resulting application under
-target folder
-
-## Flash
-Any flashing method from your host device should work.
-
-### Cargo espflash
-
-> As mentioned before, if using Podman, [cargo espflash](https://github.com/esp-rs/espflash/tree/master/cargo-espflash) can be used to flash the ESP board from the container.
-### [Adafruit ESPTool](https://adafruit.github.io/Adafruit_WebSerial_ESPTool/)
-WebSerial ESPTool is designed to be a web-capable option for programming ESP boards.
-
-Since the local repository folder is synchronised with the container `~/workspace` folder, we recommend using `cargo espflash save-image --merge <appName>.bin ` to generate a binary.
-
-In order to flash it:
-1. Open the [Adafruit ESPTool](https://adafruit.github.io/Adafruit_WebSerial_ESPTool/) flashing tool.
-2. Choose the desired baudrate.
-3. Connect to the serial port of the ESP board.
-4. Upload the generated binary.
-
-## Monitor
-
-Any serial monitor used from your host device works, like [espmonitor](https://github.com/esp-rs/espmonitor).
-
-> Using Podman also allows using the argument `--monitor` of cargo-espflash.
-
-### Online Serial Monitor
-
-Using an online serial monitor is also an option [Serial Terminal](https://serial.huhn.me/) working fine in [some browsers](https://developer.mozilla.org/en-US/docs/Web/API/Serial#browser_compatibility).
-
-# Wokwi Simulator
-
-The devcontainer includes the option of simulating the exercises with [Wokwi](https://wokwi.com/).
-
-In order to build and run a Wokwi simulation, a script, `run.sh`, under the
-`wokwi` folder, is provided to build and run the Wokwi simulation, in order
-to use it:
-1. Set the `ESP_BOARD` environment variable:
-   `$ export ESP_BOARD=<target>`. Possible values of `<target>` are:
-   - `esp32`: ESP32 DevKit V1
-   - `esp32c3`: ESP32 C3 DevKit M1
-   - `esp32c3-rust`: [Rust ESP Board](https://github.com/esp-rs/esp-rust-board)
-2. Set the `CURRENT_PROJECT` environment variable:
-   `$ export CURRENT_PROJECT=<project>`.Pointing to your project folder.
-3. Run the bash script: `$ bash wokwi/run.sh`
-
-A task is provided via `.vscode/tasks.json` to facilitate executing the script:
-1. Execute the task `Build and run Wokwi simulation`
-   1. Set the `CURRENT_PROJECT` pointing to the your project.
-   2. Select your `ESP_BOARD`.
+    ```
+    ./build.sh  [debug | release]
+    ```
+    > If no argument is passed, `release` will be used as default
 
 
-> When using Gitpod online environment, VScode tasks are not available.
+-  UI approach:
 
+    The default build task is already set to build the project, and it can be used
+    in VsCode and Gitpod:
+    - From the [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) (`Ctrl-Shift-P` or `Cmd-Shift-P`) run the `Tasks: Run Build Task` command.
+    - `Terminal`-> `Run Build Task` in the menu.
+    - With `Ctrl-Shift-B` or `Cmd-Shift-B`.
+    - From the [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) (`Ctrl-Shift-P` or `Cmd-Shift-P`) run the `Tasks: Run Task` command and
+    select `Build`.
+    - From UI: Press `Build` on the left side of the Status Bar.
+
+# Flash
+
+- Terminal approach:
+  - Using custom `runner` in `.cargo/config.toml`:
+    ```
+    cargo +esp run [--release]
+    ```
+  - Using `flash.sh` script:
+
+    ```
+    ./flash.sh [debug | release]
+    ```
+    > If no argument is passed, `release` will be used as default
+
+- UI approach:
+    - From the [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) (`Ctrl-Shift-P` or `Cmd-Shift-P`) run the `Tasks: Run Task` command and
+    select `Build & Flash`.
+    - From UI: Press `Build & Flash` on the left side of the Status Bar.
+
+
+# Wokwi Simulation
+
+- Terminal approach:
+
+    ```
+    ./run-wokwi.sh [debug | release]
+    ```
+    > If no argument is passed, `release` will be used as default
+
+- UI approach:
+
+    The default test task is already set to build the project, and it can be used
+    in VsCode and Gitpod:
+    - From the [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) (`Ctrl-Shift-P` or `Cmd-Shift-P`) run the `Tasks: Run Test Task` command
+    - With `Ctrl-Shift-,` or `Cmd-Shift-,`
+        > Note: This Shortcut is not available in Gitpod by default.
+    - From the [Command Palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette) (`Ctrl-Shift-P` or `Cmd-Shift-P`) run the `Tasks: Run Task` command and
+    select `Build & Run Wokwi`.
+    - From UI: Press `Build & Run Wokwi` on the left side of the Status Bar.
+
+## Debuging with Wokwi
+
+Wokwi offers debugging with GDB.
+
+- Terminal approach:
+    ```
+    $HOME/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch3-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-gdb target/xtensa-esp32-espidf/release/brno-public-transport -ex "target remote localhost:9333"
+    ```
+    > Update the previous command with your toolchain and project elf file.
+
+    > [Wokwi Blog: List of common GDB commands for debugging.](https://blog.wokwi.com/gdb-avr-arduino-cheatsheet/?utm_source=urish&utm_medium=blog)
+- UI approach:
+
+    Debug using with VsCode or Gitpod is also possible:
+    1. Run the Wokwi Simulation in `debug` profile
+        > Note that the simulation will pause if the browser tab is on the background
+    2. Go to `Run and Debug` section of the IDE (`Ctrl-Shift-D or Cmd-Shift-D`)
+    3. Start Debugging (`F5`)
+    4. Choose the proper user:
+        - `esp` when using VsCode or GitHub Codespaces
+        - `gitpod` when using Gitpod
 # Integrating devcontainer in existing repositories
+> **Warning**
+> This section is oudated. WIP
 
 In order to add devcontainer features to an existing repository:
 1. Copy the `.devcontainer` folder to your repository.

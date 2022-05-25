@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "gdb",
+      "request": "attach",
+      "name": "Wokwi Debug",
+      // TODO: Update the executable path
+      "executable": "${workspaceFolder}/target/xtensa-esp32-espidf/debug/brno-public-transport",
+      "target": "localhost:9333",
+      "remote": true,
+      // TODO: Update the gdb path
+      "gdbpath": "/home/${input:user}/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch3-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-gdb",
+      "cwd": "${workspaceRoot}",
+      "stopAtConnect": true,
+      "valuesFormatting": "parseText"
+    }
+  ],
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "user",
+      "description": "Select the user: esp for VsCode and Codespaces and gitpod for Gitpod:",
+      "options": [
+        "esp",
+        "gitpod"
+      ],
+      "default": "esp"
+    }
+  ]
+}
