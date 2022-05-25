@@ -8,19 +8,13 @@ For instructions on how to integrate devcontainers to existing repositories, see
 
 This repository is can be used as template repository.
 
-## Table of Contents
+# Table of Contents
 
-- [Quick Start](#quick-start)
-  - [Requirements](#requirements)
-  - [Setup](#setup)
-  - [Running the container](#running-the-container)
-  - [Build](#build)
-  - [Flash](#flash)
-    - [Cargo espflash](#cargo-espflash)
-    - [Adafruit ESPTool](#adafruit-esptool)
-  - [Monitor](#monitor)
-    - [Online Serial Monitor](#online-serial-monitor)
-- [Wokwi Simulator](#wokwi-simulator)
+- [Setup](#setup)
+- [Build](#build)
+- [Flash](#flash)
+- [Wokwi Simulation](#wokwi-simulation)
+  - [Debuging with Wokwi](#debuging-with-wokwi)
 - [Integrating devcontainer in existing repositories](#integrating-devcontainer-in-existing-repositories)
 
 # Setup
