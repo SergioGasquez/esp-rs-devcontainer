@@ -26,6 +26,11 @@ The repository supports:
     > When using GitHub Codespaces, we need to make the ports
     > public, [see instructions](https://docs.github.com/en/codespaces/developing-in-codespaces/forwarding-ports-in-your-codespace#sharing-a-port).
 
+Before opening the devcontainer, edit:
+- `.devcontainer/devcontainer.json`: Select the image or configure the args
+- `.gitpod.Dockerfile`: Configure the args
+
+
 Wait for the container to build, once the container is running, you
 should have a working environment to develop ESP boards using Rust.
 
@@ -38,6 +43,12 @@ We reccomend using one of our templates with [cargo-generate](https://github.com
 
 > Be sure to match the installed environment in the selected image tag (esp-idf version and board)
 
+Once in the devcontainer, and with the project ready, search for `TODO` in the project
+and update those fields.
+- `build.sh`: Update the ESP_BOARD
+- `flash.sh`: Update project path, ESP_BOARD and ESP_ELF
+- `run-wokwi.sh`: Update project path, ESP_BOARD and ESP_ELF
+- `launch.json`: Update executable path and gdb path
 # Build
 - Terminal approach:
 
@@ -63,8 +74,9 @@ We reccomend using one of our templates with [cargo-generate](https://github.com
 - Terminal approach:
   - Using custom `runner` in `.cargo/config.toml`:
     ```
-    cargo +esp run [--release]
+    cargo run [--release]
     ```
+    > If using an Xtensa target, use `cargo +esp`
   - Using `flash.sh` script:
 
     ```
@@ -85,7 +97,7 @@ We reccomend using one of our templates with [cargo-generate](https://github.com
     ```
     ./run-wokwi.sh [debug | release]
     ```
-    > If no argument is passed, `release` will be used as default
+    > If no argument is passed, `release` will be used as default.
 
 - UI approach:
 
@@ -112,27 +124,21 @@ Wokwi offers debugging with GDB.
 - UI approach:
 
     Debug using with VsCode or Gitpod is also possible:
-    1. Run the Wokwi Simulation in `debug` profile
-        > Note that the simulation will pause if the browser tab is on the background
-    2. Go to `Run and Debug` section of the IDE (`Ctrl-Shift-D or Cmd-Shift-D`)
-    3. Start Debugging (`F5`)
+    1. Run the Wokwi Simulation in `debug` profile.
+        > Note that the simulation will pause if the browser tab is on the background.
+    2. Go to `Run and Debug` section of the IDE (`Ctrl-Shift-D or Cmd-Shift-D`).
+    3. Start Debugging (`F5`).
     4. Choose the proper user:
-        - `esp` when using VsCode or GitHub Codespaces
-        - `gitpod` when using Gitpod
+        - `esp` when using VsCode or GitHub Codespaces.
+        - `gitpod` when using Gitpod.
 # Integrating devcontainer in existing repositories
-> **Warning**
-> This section is oudated. WIP
-
-In order to add devcontainer features to an existing repository:
-1. Copy the `.devcontainer` folder to your repository.
-2. Edit the `image` property of `devcontainer.json` with you desired tag.
-3. For Gitpod support, copy the `.gitpod.yml` file.
-   - For instructions about how to add a "Open in Gitpod" button, see their
+- For devcontainer support in VSCode and GH Codespaces:
+  - Copy the `.devcontainer` folder to your repository.Devcontainers in Gitpod:
+- For devcontainer support in Gitpod:
+  - Copy the `.gitpod.yml` and `.gitpod.Dockergile` files to your repository.
+    - For instructions about how to add a "Open in Gitpod" button, see their
       [official documentation](https://www.gitpod.io/docs/getting-started#open-in-gitpod-button)
-4. If you also want to add Wokwi Simulation support:
-   - Copy the `wokwi` folder.
-   - Use the run.sh script to run simulations, for detailed information on how
-  to properly execute it, see [Wokwi Simulator](#wokwi-simulator) Section.
-5. If you want to upload code to your board with Adafruit online tool or use Wokwi
-   simulator, you would also require copying the `config-files` folder. Feel free,
-   to copy only the file of your target board.
+- For task and debugging integration:
+  - Copy `.vscode` folder.
+  - Copy `build.sh`, `flash.sh`, `run-wokwi.sh` files.
+After copiying the desired files, go through the [Setup section](#setup)
