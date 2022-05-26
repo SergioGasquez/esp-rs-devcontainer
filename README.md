@@ -92,6 +92,10 @@ and update those fields.
 
 # Wokwi Simulation
 
+> **Warning**
+>
+>  ESP32-S3 is not available in Wokwi
+
 - Terminal approach:
 
     ```
