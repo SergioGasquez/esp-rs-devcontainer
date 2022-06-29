@@ -15,7 +15,7 @@ ARG INSTALL_RUST_TOOLCHAIN=install-rust-toolchain.sh
 # Install dependencies
 RUN apt-get update \
     && apt-get install -y git curl gcc clang ninja-build libudev-dev unzip xz-utils\
-    python3 python3-pip libusb-1.0-0 libssl-dev pkg-config libtinfo5 libpython2.7 \
+    python3 python3-pip python3-venv libusb-1.0-0 libssl-dev pkg-config libtinfo5 libpython2.7 \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # Set users
@@ -32,15 +32,13 @@ ADD --chown=${CONTAINER_USER}:${CONTAINER_GROUP} \
 
 RUN chmod a+x ${INSTALL_RUST_TOOLCHAIN} \
     && ./${INSTALL_RUST_TOOLCHAIN} \
-    --extra-crates "ldproxy cargo-espflash cargo-generate" \
+    --extra-crates "ldproxy cargo-espflash wokwi-server web-flash" \
     --clear-cache "YES" --export-file /home/${CONTAINER_USER}/export-esp.sh \
     --esp-idf-version "${ESP_IDF_VERSION}" \
     --minified-esp-idf "YES" \
-    --build-target "${ESP_BOARD}"
+    --build-target "${ESP_BOARD}" \
+    && rustup component add clippy rustfmt
 
-# Install web-flash and wokwi-server
-RUN cargo install web-flash --git https://github.com/bjoernQ/esp-web-flash-server \
-    && RUSTFLAGS="--cfg tokio_unstable" cargo install wokwi-server --git https://github.com/MabezDev/wokwi-server --locked
 
 # Activate ESP environment
 RUN echo "source /home/${CONTAINER_USER}/export-esp.sh" >> ~/.bashrc

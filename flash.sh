@@ -4,11 +4,11 @@ set -e
 
 # TODO: Update project path
 if [ "${USER}" == "gitpod" ]; then
-    export CURRENT_PROJECT=/workspace/esp-rs-devcontainer/your-project-name
+    export CURRENT_PROJECT=/workspace/your-project-name
 elif [ "${CODESPACE_NAME}" != "" ]; then
-    export CURRENT_PROJECT=/workspaces/esp-rs-devcontainer/your-project-name
+    export CURRENT_PROJECT=/workspaces/your-project-name
 else
-    export CURRENT_PROJECT=~/workspace/esp-rs-devcontainer/your-project-name
+    export CURRENT_PROJECT=~/workspace/your-project-name
 fi
 
 BUILD_MODE=""
