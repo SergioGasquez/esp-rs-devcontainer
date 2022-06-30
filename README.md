@@ -18,9 +18,34 @@ This repository is can be used as template repository.
   - [Debuging with Wokwi](#debuging-with-wokwi)
 - [Integrating devcontainer in existing repositories](#integrating-devcontainer-in-existing-repositories)
 
-# Setup
+
+# Starting a new project
+Using [cargo-generate](https://github.com/cargo-generate/cargo-generate) with one
+of the available tempaltes is the recommended way to start new projects:
+- [esp-idf-template](https://github.com/esp-rs/esp-idf-template): ESP-IDF Template
+  - `cargo generate --vcs none --git https://github.com/esp-rs/esp-idf-template cargo`
+- [esp-template](https://github.com/esp-rs/esp-template): `no_std` template.
+  - `cargo generate https://github.com/esp-rs/esp-template`
+
+See [project section of awesome-esp-rust](https://github.com/esp-rs/awesome-esp-rust#projects) for inspiration in other projects
+
+
+# Integrating devcontainer in existing repositories
+- For devcontainer support in VSCode and GH Codespaces:
+  - Copy the `.devcontainer` folder to your repository.Devcontainers in Gitpod:
+- For devcontainer support in Gitpod:
+  - Copy the `.gitpod.yml` and `.gitpod.Dockergile` files to your repository.
+    - For instructions about how to add a "Open in Gitpod" button, see their
+      [official documentation](https://www.gitpod.io/docs/getting-started#open-in-gitpod-button)
+- For task and debugging integration:
+  - Copy `.vscode` folder.
+  - Copy `build.sh`, `flash.sh`, `run-wokwi.sh` files.
+After copiying the desired files, go through the [Setup section](#setup)
+
+## Setup
 The repository supports:
--  [Gitpod](https://gitpod.io/): [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/github.com/SergioGasquez/esp-rs-devcontainer)
+-  [Gitpod](https://gitpod.io/)
+   - ["Open in Gitpod" button](https://www.gitpod.io/docs/getting-started#open-in-gitpod-button)
 -  [Vs Code Devcontainers](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-an-existing-folder-in-a-container)
 -  [GitHub Codespaces](https://docs.github.com/en/codespaces/developing-in-codespaces/creating-a-codespace)
     > **Note**
@@ -37,30 +62,16 @@ from the Dockerfile by selecting the `image` property instead of `build` in
 `.devcontainer/devcontainer.json`. Further customization of the Dev Container can
 be achived, see [.devcontainer.json reference](https://code.visualstudio.com/docs/remote/devcontainerjson-reference).
 
-Before opening the devcontainer, edit:
-- `.devcontainer/devcontainer.json`: Select the image or configure the args
-- `.gitpod.Dockerfile`: Configure the args
-
-
-Wait for the container to build, once the container is running, you
-should have a working environment to develop ESP boards using Rust.
-
-
-We reccomend using one of our templates with [cargo-generate](https://github.com/cargo-generate/cargo-generate)(already installed by in the images) as starting project:
-- [esp-idf-template](https://github.com/esp-rs/esp-idf-template): ESP-IDF Template
-  - `cargo generate --vcs none --git https://github.com/esp-rs/esp-idf-template cargo`
-- [esp-template](https://github.com/esp-rs/esp-template): `no_std` template.
-  - `cargo generate https://github.com/esp-rs/esp-template`
-
-> Be sure to match the installed environment in the selected image tag (esp-idf version and board)
-
-Once in the devcontainer, and with the project ready, search for `TODO` in the project
+Before opening the Dev Container, address all the ToDos by searching for `TODO` in the project
 and update those fields.
 - `build.sh`: Update the ESP_BOARD
 - `flash.sh`: Update project path, ESP_BOARD and ESP_ELF
 - `run-wokwi.sh`: Update project path, ESP_BOARD and ESP_ELF
-- `launch.json`: Update executable path and gdb path
-# Build
+- `launch.json`: Update executable path and GDB path
+
+By now, the Dev Container should be ready to run and the environment should be ready
+to use.
+## Build
 - Terminal approach:
 
     ```
@@ -80,14 +91,9 @@ and update those fields.
     select `Build`.
     - From UI: Press `Build` on the left side of the Status Bar.
 
-# Flash
+## Flash
 
 - Terminal approach:
-  - Using custom `runner` in `.cargo/config.toml`:
-    ```
-    cargo run [--release]
-    ```
-    > If using an Xtensa target, use `cargo +esp`
   - Using `flash.sh` script:
 
     ```
@@ -101,7 +107,7 @@ and update those fields.
     - From UI: Press `Build & Flash` on the left side of the Status Bar.
 
 
-# Wokwi Simulation
+## Wokwi Simulation
 
 > **Warning**
 >
@@ -125,7 +131,7 @@ and update those fields.
     select `Build & Run Wokwi`.
     - From UI: Press `Build & Run Wokwi` on the left side of the Status Bar.
 
-## Debuging with Wokwi
+### Debuging with Wokwi
 
 Wokwi offers debugging with GDB.
 
@@ -146,14 +152,3 @@ Wokwi offers debugging with GDB.
     4. Choose the proper user:
         - `esp` when using VsCode or GitHub Codespaces.
         - `gitpod` when using Gitpod.
-# Integrating devcontainer in existing repositories
-- For devcontainer support in VSCode and GH Codespaces:
-  - Copy the `.devcontainer` folder to your repository.Devcontainers in Gitpod:
-- For devcontainer support in Gitpod:
-  - Copy the `.gitpod.yml` and `.gitpod.Dockergile` files to your repository.
-    - For instructions about how to add a "Open in Gitpod" button, see their
-      [official documentation](https://www.gitpod.io/docs/getting-started#open-in-gitpod-button)
-- For task and debugging integration:
-  - Copy `.vscode` folder.
-  - Copy `build.sh`, `flash.sh`, `run-wokwi.sh` files.
-After copiying the desired files, go through the [Setup section](#setup)
