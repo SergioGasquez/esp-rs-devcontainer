@@ -25,7 +25,6 @@ WORKDIR /home/${CONTAINER_USER}
 
 # Install Rust toolchain, extra crates and esp-idf
 ENV PATH=${PATH}:/home/${CONTAINER_USER}/.cargo/bin:/home/${CONTAINER_USER}/opt/bin
-
 ADD --chown=${CONTAINER_USER}:${CONTAINER_GROUP} \
     https://github.com/esp-rs/rust-build/releases/download/v${TOOLCHAIN_VERSION}/${INSTALL_RUST_TOOLCHAIN} \
     /home/${CONTAINER_USER}/${INSTALL_RUST_TOOLCHAIN}

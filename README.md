@@ -1,7 +1,8 @@
 # esp-rs-devcontainer
 
-This repository uses a container to offer the environment needed to develop applications for [ESP
-boards using Rust](https://github.com/esp-rs), it also provides integration with Visual Studio Code using [remote containers](https://code.visualstudio.com/docs/remote/containers), [GitHub Codespaces](https://docs.github.com/es/codespaces/developing-in-codespaces) and [Gitpod](https://www.gitpod.io/).
+This repository offers template Dockerfiles for [Dev Containers](https://code.visualstudio.com/docs/remote/containers), with the
+environment needed to develop applications for [ESP boards using Rust](https://github.com/esp-rs),
+in VS Code, [Gitpod](https://www.gitpod.io/) and [GitHub Codespaces](https://docs.github.com/es/codespaces/developing-in-codespaces).
 
 For instructions on how to integrate devcontainers to existing repositories, see
 [this section](#integrating-devcontainer-in-existing-repositories).
