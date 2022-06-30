@@ -24,8 +24,18 @@ The repository supports:
 -  [Vs Code Devcontainers](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-an-existing-folder-in-a-container)
 -  [GitHub Codespaces](https://docs.github.com/en/codespaces/developing-in-codespaces/creating-a-codespace)
     > **Note**
+    >
+    > In [order to use GitHub Codespaces](https://github.com/features/codespaces#faq)
+    > the project needs to be published in a GitHub repository and the user needs
+    > to be part of the Codespaces beta or have the project under an organization.
+    >
     > When using GitHub Codespaces, we need to make the ports
     > public, [see instructions](https://docs.github.com/en/codespaces/developing-in-codespaces/forwarding-ports-in-your-codespace#sharing-a-port).
+
+If using VS Code or GitHub Codespaces, you can pull the image instead of building it
+from the Dockerfile by selecting the `image` property instead of `build` in
+`.devcontainer/devcontainer.json`. Further customization of the Dev Container can
+be achived, see [.devcontainer.json reference](https://code.visualstudio.com/docs/remote/devcontainerjson-reference).
 
 Before opening the devcontainer, edit:
 - `.devcontainer/devcontainer.json`: Select the image or configure the args
