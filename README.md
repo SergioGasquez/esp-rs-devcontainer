@@ -9,16 +9,6 @@ For instructions on how to integrate devcontainers to existing repositories, see
 
 This repository is can be used as template repository.
 
-# Table of Contents
-
-- [Setup](#setup)
-- [Build](#build)
-- [Flash](#flash)
-- [Wokwi Simulation](#wokwi-simulation)
-  - [Debuging with Wokwi](#debuging-with-wokwi)
-- [Integrating devcontainer in existing repositories](#integrating-devcontainer-in-existing-repositories)
-
-
 # Starting a new project
 Using [cargo-generate](https://github.com/cargo-generate/cargo-generate) with one
 of the available tempaltes is the recommended way to start new projects:
