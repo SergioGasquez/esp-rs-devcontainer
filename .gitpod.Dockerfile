@@ -27,7 +27,7 @@ ADD --chown=${CONTAINER_USER}:${CONTAINER_GROUP} \
 RUN chmod a+x ${INSTALL_RUST_TOOLCHAIN} \
     && ./${INSTALL_RUST_TOOLCHAIN} \
     --extra-crates "ldproxy cargo-espflash wokwi-server web-flash" \
-    --clear-cache "YES" --export-file /home/${CONTAINER_USER}/export-esp.sh \
+    --export-file /home/${CONTAINER_USER}/export-esp.sh \
     --esp-idf-version "${ESP_IDF_VERSION}" \
     --minified-esp-idf "YES" \
     --build-target "${ESP_BOARD}" \
