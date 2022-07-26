@@ -1,7 +1,7 @@
 {
   "name": "esp-rs",
   // TODO: Select image(https://hub.docker.com/r/espressif/idf-rust/tags) or configure Dockerfile args
-  //"image": "docker.io/espressif/idf-rust:espidf_v4.4",
+  //"image": "docker.io/espressif/idf-rust:all_v4.4_1.62.1.0",
   "build": {
     "dockerfile": "Dockerfile",
     "args": {
