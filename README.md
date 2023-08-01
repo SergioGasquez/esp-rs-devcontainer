@@ -1,5 +1,13 @@
 # esp-rs-devcontainer
 
+> **Warning**
+>
+> This repository is outdated and was only an initial PoC. If you want to use
+> DevContainers in esp-rs, see
+> [Using Dev Containers in the templates](https://esp-rs.github.io/book/writing-your-own-application/generate-project/index.html#using-dev-containers-in-the-templates)
+> section of The Rust on ESP Book.
+
+
 This repository offers template Dockerfiles for [Dev Containers](https://code.visualstudio.com/docs/remote/containers), with the
 environment needed to develop applications for [ESP boards using Rust](https://github.com/esp-rs),
 in VS Code, [Gitpod](https://www.gitpod.io/) and [GitHub Codespaces](https://docs.github.com/es/codespaces/developing-in-codespaces).
